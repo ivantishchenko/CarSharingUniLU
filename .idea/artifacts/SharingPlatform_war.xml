@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SharingPlatform:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="cars.war">
+      <element id="artifact" artifact-name="SharingPlatform:war exploded" />
+    </root>
+  </artifact>
+</component>
