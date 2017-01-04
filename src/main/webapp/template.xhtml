@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+    <h:head>
+        <title>Car sharing application</title>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="application.css" target="head"/>
+        <div id="container">
+            <div class="content-navigation">
+                <p:toolbar style="vertical-align: middle">
+                    <f:facet name="left">
+                        <h:form style="margin-top: 12px">
+                            <h:panelGrid columns="2" rendered="#{sessionData.loggedIn}">
+                                <p:commandButton value="Edit users list" action="/admin/userCrud.jsf?faces-redirect=true"
+                                    rendered="#{sessionData.loggedUser.adminRole}"/>
+                                <p:commandButton value="Log out" action="#{loginAction.logout}" immediate="true"/>
+                            </h:panelGrid>
+                            <p:commandLink value="Login" action="/login.jsf?faces-redirct=true" immediate="true"
+                                           rendered="#{not sessionData.loggedIn}"/>
+                        </h:form>
+                    </f:facet>
+                </p:toolbar>
+            </div>
+            <div class="content-container">
+                <h:panelGrid>
+                    <ui:insert name="content">
+                        Body content missed
+                    </ui:insert>
+                </h:panelGrid>
+
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>

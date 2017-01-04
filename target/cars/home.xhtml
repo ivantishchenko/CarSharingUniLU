@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="template.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h:commandLink value="Please sign" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
+
+            <h:panelGrid columns="1" rendered="#{sessionData.loggedIn}">
+                <h:outputLabel value="Welcome, #{sessionData.loggedUser.username}, you are logged in :-)"/>
+                <h:commandLink value="make your comments" action="/userCommentCrud?faces-redirect=true"/>
+                <h:commandLink value="make your bookmarks" action="/userBookmarkCrud?faces-redirect=true"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

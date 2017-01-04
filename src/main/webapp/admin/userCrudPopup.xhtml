@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--suppress XmlWrongRootElement -->
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="popupUser" widgetVar="popupUser" modal="true" resizable="false"
+              header="#{userCrudBean.readOnly?'Supprimer...':empty userCrudBean.entity.jpaVersion?'Ajouter...':'&Eacute;diter..'}">
+        <p:ajax form="formPopupUser" event="close"
+                listener="#{userCrudBean.endConversation}" global="false"/>
+        <h:form id="formPopupUser">
+            <p:outputPanel style="text-align:center;">
+                <p:panelGrid columns="3" rendered="#{not empty userCrudBean.entity}">
+                    <p:outputLabel for="itUsername" value="Username:"/>
+                    <p:inputText id="itUsername" value="#{userCrudBean.entity.username}" required="true"
+                                   disabled="#{userCrudBean.readOnly}"/>
+                    <p:message for="itUsername"/>
+
+                    <p:outputLabel for="itPassword" value="Password:"/>
+                    <p:inputText id="itPassword" value="#{userCrudBean.entity.password}" required="true"
+                                 disabled="#{userCrudBean.readOnly}"/>
+                    <p:message for="itPassword"/>
+
+                    <p:outputLabel for="sbcRole" value="AdminRole:"/>
+                    <p:selectBooleanCheckbox id="sbcRole" value="#{userCrudBean.entity.adminRole}"
+                                 disabled="#{userCrudBean.readOnly}"/>
+                    <p:message for="sbcRole"/>
+
+                    <p:commandButton value="Enregistrer" icon="ui-icon-disk"
+                                     rendered="#{not userCrudBean.readOnly}"
+                                     action="#{userCrudBean.doSaveEdit}"
+                                     update="@(form)"
+                                     oncomplete="if(!args.validationFailed) { PF('popupUser').hide(); PF('tblUser').filter(); } return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                    <p:commandButton value="Supprimer" icon="ui-icon-trash"
+                                     rendered="#{userCrudBean.readOnly}"
+                                     action="#{userCrudBean.doDelete}"
+                                     update="@(form)"
+                                     oncomplete="PF('popupUser').hide(); PF('tblUser').filter(); return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                    <p:commandButton value="Annuler" icon="ui-icon-cancel" immediate="true"
+                                     action="#{userCrudBean.doCancel}"
+                                     update="@(form)"
+                                     oncomplete="PF('popupUser').hide(); return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+                <p:messages/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+</ui:composition>

@@ -1,4 +1,4 @@
-package lu.tishchenko.utils;
+package lu.tishchenko.carsharing.utils;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;

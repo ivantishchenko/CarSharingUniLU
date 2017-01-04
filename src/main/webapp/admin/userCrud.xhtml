@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+        <h:form id="formTblUser">
+            <p:dataTable id="tblUser" widgetVar="tblUser" var="user" value="#{userFacade.all}">
+                <f:facet name="header">
+                    Users
+                </f:facet>
+                <p:column style="width:66px;" exportable="false">
+                    <f:facet name="header">
+                        <p:commandButton icon="ui-icon-plus" title="Ajouter"
+                                         action="#{userCrudBean.startNewEntity}"
+                                         update="popupUser" oncomplete="PF('popupUser').show()"/>
+                    </f:facet>
+                    <p:commandButton icon="ui-icon-pencil" title="&Eacute;diter"
+                                     action="#{userCrudBean.startEditEntity(user.myClone)}"
+                                     update="popupUser" oncomplete="PF('popupUser').show()"/>
+
+                    <p:commandButton icon="ui-icon-trash" title="Supprimer"
+                                     action="#{userCrudBean.startDelete(user)}"
+                                     update="popupUser" oncomplete="PF('popupUser').show()"/>
+
+                </p:column>
+                <p:column headerText="Username" sortBy="#{user.username}" filterBy="#{user.username}">
+                    <h:outputText value="#{user.username}"/>
+                </p:column>
+                <p:column headerText="AdminRole" sortBy="#{user.adminRole}" filterBy="#{user.adminRole}">
+                    <h:outputText value="#{user.adminRole}"/>
+                </p:column>
+                <f:facet name="footer">
+                    Total count: #{fn:length(userFacade.all)}
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+        <ui:include src="userCrudPopup.xhtml"/>
+    </ui:define>
+</ui:composition>
+</html>

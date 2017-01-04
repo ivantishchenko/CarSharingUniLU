@@ -1,0 +1,145 @@
+html {
+    height: 100%;
+}
+
+.heading1 {
+    color:#333333;
+    text-decoration: underline;
+    font-weight: bold;
+    padding-left: 25px;
+    font: bolder 25px "Lucida Sans Unicode", "Lucida Grande", Verdana, Geneva, Arial, sans-serif;
+}
+
+.heading2 {
+    color:#333333;
+    font-weight: bold;
+    text-decoration: underline;
+    font: bolder 12px "Lucida Sans Unicode", "Lucida Grande", Verdana, Geneva, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* background: #c0c0c0; */
+    background-color: #CCCCCC;
+    font: normal 12px "Lucida Sans Unicode", "Lucida Grande", Verdana, Geneva, Arial, sans-serif;
+    height: 100%;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error_message{
+    color: red;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #a52a2a;
+}
+
+.error {
+    color: red;
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.imageLink{
+    border: 0;
+}
+
+.header{
+    width: 100%;
+    background-color: #333333;
+}
+
+#footer{
+    position: relative;
+    width: 100%;
+    background-color: #999999;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    color: #FFFFFF;
+    font-family: Verdana;
+    padding: 2px 0px 2px 0px;
+    bottom:0%;
+    text-align: right;
+    margin-top: 25px;
+}
+
+.rf-edt{
+    padding:1px; 'TO PREVENT SCROLL BAR IN DATATABLE'
+}
+
+#waitPanel {
+    width: 100px;
+    height: 50px;
+}
+
+.pending {
+    background-color: indianred;
+}
+
+.completed {
+    background-color: lightgreen;
+}
+
+.inProgress {
+    background-color: orange;
+}
+
+.rejected{
+    background-color: darkred;
+}
+
+
+.rf-select-small-width input[type="text"] {
+    width: 30px;
+}
+
+.vintermanInUse {
+    background-color: darkgreen;
+}
+
+.vintermanNotInUse {
+    background-color: indianred;
+}
+
+.vintermanOnTrack {
+    background-color: orange;
+}
+
+.vintermanDeleted {
+    background-color: darkred;
+    text-decoration: line-through;
+}
+
+.impair {
+    background-color: #DDDDDD;
+}
+
+.pair {
+    background-color: #BBBBBB;
+}
+
+.blockTable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+}
+
+.blockTable input {
+    width:180px
+}
+
+.label {
+    font-weight: bold;
+    padding-right: 15px;
+}
