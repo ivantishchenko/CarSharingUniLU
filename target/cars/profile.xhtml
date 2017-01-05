@@ -2,19 +2,26 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
 <ui:composition template="template.xhtml">
     <ui:define name="content">
-        <h:form id="formLogin">
+        <h:form id="formUpdate">
+            <h:outputLabel value="Dear, #{sessionData.loggedUser.name}, change your profile info here"/>
             <h:panelGrid columns="3">
-                <h:outputLabel for="name" value="Username"/>
+                <h:outputLabel for="name" value="New username"/>
                 <h:inputText id="name" value="#{loginModel.username}" required="true"/>
                 <h:message for="name"/>
-                <h:outputLabel for="password" value="Password"/>
+                <h:outputLabel for="password" value="New password"/>
                 <h:inputSecret id="password" value="#{loginModel.password}" required="true"/>
                 <h:message for="password"/>
                 <h:outputText/>
-                <h:commandButton id="btLogin" value="LOGIN" action="#{loginAction.login}" update="formLogin"/>
+                <h:commandButton id="btnUpdate" value="UPDATE" action="#{loginAction.update()}" update="formUpdate">
+
+                </h:commandButton>
             </h:panelGrid>
             <h:messages/>
         </h:form>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+        <h:form id="formTblCar">
+            <h:commandLink value="Sign in" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
+
+            <p:dataTable id="tblCar" widgetVar="tblCar" var="car" value="#{carFacade.getCar(sessionData.loggedUser)}" rendered="#{sessionData.loggedIn}">
+                <f:facet name="header">
+                    Car
+                </f:facet>
+                <p:column style="width:66px;" exportable="false">
+                    <f:facet name="header">
+                        <p:commandButton icon="ui-icon-plus" title="Add"
+                                         action="#{carCrudBean.startNewEntity}"
+                                         update="popupCar" oncomplete="PF('popupCar').show()"/>
+                    </f:facet>
+                    <p:commandButton icon="ui-icon-pencil" title="Edit"
+                                     action="#{carCrudBean.startEditEntity(car.myClone)}"
+                                     update="popupCar" oncomplete="PF('popupCar').show()"/>
+
+                    <p:commandButton icon="ui-icon-trash" title="Delete"
+                                     action="#{carCrudBean.startDelete(car)}"
+                                     update="popupCar" oncomplete="PF('popupCar').show()"/>
+
+                </p:column>
+                <p:column headerText="Car name" >
+                    <h:outputText value="#{car.name}"/>
+                </p:column>
+                <p:column headerText="Info">
+                    <h:outputText value="#{car.info}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <ui:include src="carCrudPopup.xhtml"/>
+    </ui:define>
+</ui:composition>
+</html>

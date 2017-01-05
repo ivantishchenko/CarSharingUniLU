@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--suppress XmlWrongRootElement -->
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="popupCar" widgetVar="popupCar" modal="true" resizable="false"
+              header="#{carCrudBean.readOnly?'Delete car':empty carCrudBean.entity.created?'Add car':'Edit car'}">
+
+        <p:ajax form="formPopupCar" event="close"
+                listener="#{carCrudBean.endConversation}" global="false"/>
+
+        <h:form id="formPopupCar">
+            <h:commandLink value="Sign in" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
+
+            <p:outputPanel style="text-align:center;" rendered="#{sessionData.loggedIn}">
+                <p:panelGrid columns="3" rendered="#{not empty carCrudBean.entity}">
+                    <p:outputLabel for="isName" value="Car name:"/>
+                    <p:inputText id="isName" value="#{carCrudBean.entity.name}" required="true"
+                                 disabled="#{carCrudBean.readOnly}"/>
+                    <p:message for="isName"/>
+
+
+                    <p:outputLabel for="isInfo" value="Info:"/>
+                    <p:inputText id="isInfo" value="#{carCrudBean.entity.info}" required="true"
+                                 disabled="#{carCrudBean.readOnly}"/>
+                    <p:message for="isInfo"/>
+
+                    <p:commandButton value="Save" icon="ui-icon-disk"
+                                     rendered="#{not carCrudBean.readOnly}"
+                                     action="#{carCrudBean.doSaveEdit}"
+                                     update="@(form)"
+                                     oncomplete="if(!args.validationFailed) { PF('popupCar').hide(); PF('tblCar').filter(); } return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                    <p:commandButton
+                            value="Remove" icon="ui-icon-trash"
+                            rendered="#{carCrudBean.readOnly}"
+                            action="#{carCrudBean.doDelete}"
+                            update="@(form)"
+                            oncomplete="PF('popupCar').hide(); PF('tblCar').filter(); return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                    <p:commandButton value="Cancel" icon="ui-icon-cancel" immediate="true"
+                                     action="#{carCrudBean.doCancel}"
+                                     update="@(form)"
+                                     oncomplete="PF('popupCar').hide(); return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+                <p:messages/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+</ui:composition>

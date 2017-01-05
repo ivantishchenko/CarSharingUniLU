@@ -1,7 +1,7 @@
 package lu.tishchenko.ejb.facade;
 
 import lu.tishchenko.ejb.entity.User;
-import lu.tishchenko.ejb.entity.helper.AbstractDBObjectFacade;
+import lu.tishchenko.ejb.facade.helper.AbstractDBObjectFacade;
 
 import javax.ejb.Stateless;
 import javax.inject.Named;

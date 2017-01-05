@@ -25,6 +25,20 @@ public class LoginAction {
     @Inject
     private SessionData sessionData;
 
+    public String update() {
+        User currentUser = sessionData.getLoggedUser();
+        logger.info("update... (user: " + currentUser.getName() + " / " + currentUser.getPassword() + ")");
+        logger.info("newName = " + credentials.getUsername() + " / newPassword = " + credentials.getPassword());
+
+        currentUser.setPassword(credentials.getPassword());
+        currentUser.setName(credentials.getUsername());
+        userFacade.saveOrUpdate(currentUser);
+
+        // log out after successful update
+        sessionData.setLoggedUser(null);
+        return "/login.xhtml?faces-redirect=true";
+    }
+
     public String login() {
         logger.info("login... (user: " + credentials.getUsername() + " / " + credentials.getPassword() + ")");
         sessionData.setLoggedUser(null);

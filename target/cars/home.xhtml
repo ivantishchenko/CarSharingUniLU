@@ -2,7 +2,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="template.xhtml">
     <ui:define name="content">
@@ -10,11 +11,13 @@
             <h:commandLink value="Please sign" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
 
             <h:panelGrid columns="1" rendered="#{sessionData.loggedIn}">
-                <h:outputLabel value="Welcome, #{sessionData.loggedUser.username}, you are logged in :-)"/>
-                <h:commandLink value="make your comments" action="/userCommentCrud?faces-redirect=true"/>
-                <h:commandLink value="make your bookmarks" action="/userBookmarkCrud?faces-redirect=true"/>
+                <h:outputLabel value="Welcome, #{sessionData.loggedUser.name}, you are logged in :-)"/>
+                <p:commandButton icon="ui-icon-home" value="My trips" action="/user/myTripCrud.jsf?faces-redirect=true"/>
+                <p:commandButton icon="ui-icon-suitcase" value="All trips" action="/trip.jsf?faces-redirect=true"/>
+                <p:commandButton icon="ui-icon-home" value="My vehicle" action="car/carCrud.jsf?faces-redirect=true"/>
             </h:panelGrid>
         </h:form>
+        <ui:include src="car/carCrudPopup.xhtml"/>
     </ui:define>
 </ui:composition>
 </html>

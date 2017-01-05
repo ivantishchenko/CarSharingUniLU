@@ -17,6 +17,7 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="uni2015" />
+          <factory-entry name="uni2017" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

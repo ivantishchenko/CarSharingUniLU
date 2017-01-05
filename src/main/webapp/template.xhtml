@@ -15,7 +15,9 @@
                 <p:toolbar style="vertical-align: middle">
                     <f:facet name="left">
                         <h:form style="margin-top: 12px">
-                            <h:panelGrid columns="2" rendered="#{sessionData.loggedIn}">
+                            <h:panelGrid columns="4" rendered="#{sessionData.loggedIn}">
+                                <p:commandButton value="Home" action="/home?faces-redirect=true" />
+                                <p:commandButton value="Profile update" action="/profile?faces-redirect=true" />
                                 <p:commandButton value="Edit users list" action="/admin/userCrud.jsf?faces-redirect=true"
                                     rendered="#{sessionData.loggedUser.adminRole}"/>
                                 <p:commandButton value="Log out" action="#{loginAction.logout}" immediate="true"/>

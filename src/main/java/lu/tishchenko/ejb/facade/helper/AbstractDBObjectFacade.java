@@ -1,4 +1,6 @@
-package lu.tishchenko.ejb.entity.helper;
+package lu.tishchenko.ejb.facade.helper;
+
+import lu.tishchenko.ejb.entity.helper.AbstractDBObject;
 
 import javax.inject.Inject;
 import javax.persistence.*;
