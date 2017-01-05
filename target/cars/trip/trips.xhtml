@@ -13,7 +13,7 @@
             <p:dataTable id="tblTrip" widgetVar="tblTrip" var="trip"
                          value="#{tripFacade.getAll(sessionData.loggedUser)}" rendered="#{sessionData.loggedIn}">
                 <f:facet name="header">
-                    Tracks
+                    All trips
                 </f:facet>
                 <p:column style="width:44px;" exportable="false">
                     <p:commandButton icon="ui-icon-plus" title="Book"

@@ -14,12 +14,6 @@
                 <p:panel id="user" header="Welcome" style="margin-bottom:20px">
                 <h:outputLabel value="Welcome, #{sessionData.loggedUser.name}, you are logged in :-)"/>
                 </p:panel>
-
-
-                <p:commandButton icon="ui-icon-home" value="My trips" action="user/myTripCrud.jsf?faces-redirect=true"/>
-                <p:commandButton icon="ui-icon-suitcase" value="All trips" action="trip/trips.jsf?faces-redirect=true"/>
-                <p:commandButton icon="ui-icon-home" value="My vehicle" action="car/carCrud.jsf?faces-redirect=true"/>
-
             </h:panelGrid>
         </h:form>
         <ui:include src="car/carCrudPopup.xhtml"/>
