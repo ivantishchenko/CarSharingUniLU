@@ -10,6 +10,9 @@
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
         <h:form id="formTblTrip">
+
+            <h:commandLink value="Sign in" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
+
             <p:dataTable id="tblTrip" widgetVar="tblTrip" var="trip"
                          value="#{tripFacade.getAll(sessionData.loggedUser)}" rendered="#{sessionData.loggedIn}">
                 <f:facet name="header">

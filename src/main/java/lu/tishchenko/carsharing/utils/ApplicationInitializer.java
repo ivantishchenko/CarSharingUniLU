@@ -37,109 +37,104 @@ public class ApplicationInitializer {
 
     }
 
-    private void createBaseTable() {
-        User adminUser = new User();
-        adminUser.setName("admin");
-        adminUser.setPassword("admin1");
-        adminUser.setAdminRole(true);
-        User adminUser1 = new User();
-        adminUser1.setName("admin1");
-        adminUser1.setPassword("admin1");
-        adminUser1.setAdminRole(true);
-        User user = new User();
-        user.setName("user");
-        user.setPassword("user1");
-        user.setAdminRole(false);
-        User user1 = new User();
-        user1.setName("user1");
-        user1.setPassword("user1");
-        user1.setAdminRole(false);
+    private void createBaseTable(){
+        User tom = new User();
+        tom.setName("tom");
+        tom.setPassword("123");
+        tom.setAdminRole(true);
+
+        User ivan = new User();
+        ivan.setName("ivan");
+        ivan.setPassword("123");
+        ivan.setAdminRole(true);
+
+        User volker = new User();
+        volker.setName("volker");
+        volker.setPassword("123");
+        volker.setAdminRole(false);
 
         Car car = new Car();
         car.setName("CarRepository");
         car.setInfo("This is my car " + car.getName());
 
-        Car car1 = new Car();
-        car1.setName("Car1");
-        car1.setInfo("This is my car " + car1.getName());
-        Car car2 = new Car();
-        car2.setName("Car2");
-        car2.setInfo("This is my car " + car2.getName());
-        Car car3 = new Car();
-        car3.setName("Car3");
-        car3.setInfo("This is my car " + car3.getName());
+        Car mb = new Car();
+        mb.setName("MB");
+        mb.setInfo("e550 " + mb.getName());
 
-        Trip track = new Trip();
-        track.setName("Track");
-        track.setMaxCompanions(4);
-        track.setFreePlaces(track.getMaxCompanions());
-        track.setStartLocation("start");
-        track.setStopLocation("stop");
-        Trip track1 = new Trip();
-        track1.setName("Track1");
-        track1.setMaxCompanions(2);
-        track1.setFreePlaces(track1.getMaxCompanions());
-        track1.setStartLocation("start");
-        track1.setStopLocation("stop");
-        Trip track2 = new Trip();
-        track2.setName("Track2");
-        track2.setMaxCompanions(3);
-        track2.setFreePlaces(track2.getMaxCompanions());
-        track2.setStartLocation("start2");
-        track2.setStopLocation("stop2");
-        Trip track3 = new Trip();
-        track3.setName("Track3");
-        track3.setMaxCompanions(2);
-        track3.setFreePlaces(track3.getMaxCompanions());
-        track3.setStartLocation("start3");
-        track3.setStopLocation("stop3");
+        Car bmw = new Car();
+        bmw.setName("BMW");
+        bmw.setInfo("x6 " + bmw.getName());
 
-        adminUser.setCar(car);
-        adminUser1.setCar(car1);
-        user.setCar(car2);
-        user1.setCar(car3);
-        car.setOwner(adminUser);
-        car1.setOwner(adminUser1);
-        car2.setOwner(user);
-        car3.setOwner(user1);
+        Car vw = new Car();
+        vw.setName("VW");
+        vw.setInfo("GTI " + vw.getName());
 
-        List<Trip> ownerTracks = new ArrayList<Trip>();
-        ownerTracks.add(track);
-        adminUser.setTracks(ownerTracks);
-        track.setOwner(adminUser);
+        Trip milanBasel = new Trip();
+        milanBasel.setName("Cool trip");
+        milanBasel.setMaxCompanions(4);
+        milanBasel.setFreePlaces(milanBasel.getMaxCompanions());
+        milanBasel.setStartLocation("Milan");
+        milanBasel.setStopLocation("Basel");
 
-        ownerTracks = new ArrayList<Trip>();
-        ownerTracks.add(track1);
-        ownerTracks.add(track2);
-        adminUser1.setTracks(ownerTracks);
-        track1.setOwner(adminUser1);
-        track2.setOwner(adminUser1);
-        ownerTracks = new ArrayList<Trip>();
-        ownerTracks.add(track3);
-        user.setTracks(ownerTracks);
-        track3.setOwner(user);
+        Trip oxfordCambridge = new Trip();
+        oxfordCambridge.setName("UK Ttrip");
+        oxfordCambridge.setMaxCompanions(2);
+        oxfordCambridge.setFreePlaces(oxfordCambridge.getMaxCompanions());
+        oxfordCambridge.setStartLocation("Oxford");
+        oxfordCambridge.setStopLocation("Cambridge");
 
-            /*List<User> companions = new ArrayList<User>();
-            companions.add(user1);
-            track.setCompanions(companions);
-            track1.setCompanions(companions);*/
-            /*List<Track> reservedTracks = new ArrayList<Track>();
-            reservedTracks.add(track);
-            reservedTracks.add(track1);
-            user1.setReservedTracks(reservedTracks);*/
+        Trip benelux = new Trip();
+        benelux.setName("Benelux trip");
+        benelux.setMaxCompanions(3);
+        benelux.setFreePlaces(benelux.getMaxCompanions());
+        benelux.setStartLocation("Luxembourg");
+        benelux.setStopLocation("Brussels");
 
-        em.merge(adminUser);
-        em.merge(adminUser1);
-        em.merge(user);
-        em.merge(user1);
+        Trip berlinParis = new Trip();
+        berlinParis.setName("Old school trip");
+        berlinParis.setMaxCompanions(2);
+        berlinParis.setFreePlaces(berlinParis.getMaxCompanions());
+        berlinParis.setStartLocation("Berlin");
+        berlinParis.setStopLocation("Paris");
+
+        tom.setCar(car);
+        ivan.setCar(mb);
+        volker.setCar(bmw);
+
+        car.setOwner(tom);
+        mb.setOwner(ivan);
+        bmw.setOwner(volker);
+
+
+        List<Trip> myTrips = new ArrayList<Trip>();
+        myTrips.add(milanBasel);
+        tom.setTracks(myTrips);
+        milanBasel.setOwner(tom);
+
+        myTrips = new ArrayList<Trip>();
+        myTrips.add(oxfordCambridge);
+        myTrips.add(benelux);
+        ivan.setTracks(myTrips);
+        oxfordCambridge.setOwner(ivan);
+        benelux.setOwner(ivan);
+        myTrips = new ArrayList<Trip>();
+        myTrips.add(berlinParis);
+        volker.setTracks(myTrips);
+        berlinParis.setOwner(volker);
+
+        em.merge(tom);
+        em.merge(ivan);
+        em.merge(volker);
 
         List<User> users = em.createQuery("select u from User u").getResultList();
         List<Trip> tracks = em.createQuery("select t from Trip t").getResultList();
-        User u = users.get(3);
+
+        User u = users.get(2);
         Trip t1 = tracks.get(1);
         Trip t2 = tracks.get(2);
         List<User> companions = new ArrayList<User>();
         List<Trip> reservedTracks = new ArrayList<Trip>();
+
         companions.add(u);
         reservedTracks.add(t1);
         reservedTracks.add(t2);
@@ -147,6 +142,46 @@ public class ApplicationInitializer {
         t1.setCompanions(companions);
         t2.setCompanions(companions);
         em.merge(u);
+    }
+
+    private void simpleSetUp() {
+        User tom = new User();
+        tom.setName("tom");
+        tom.setPassword("123");
+        tom.setAdminRole(true);
+
+        User ivan = new User();
+        ivan.setName("ivan");
+        ivan.setPassword("123");
+        ivan.setAdminRole(true);
+
+        User volker = new User();
+        volker.setName("volker");
+        volker.setPassword("123");
+        volker.setAdminRole(false);
+
+
+        Car mb = new Car();
+        mb.setName("MB");
+        mb.setInfo("E550 " + mb.getName());
+
+        Car bmw = new Car();
+        bmw.setName("BMW");
+        bmw.setInfo("X6 " + bmw.getName());
+
+        Car vw = new Car();
+        vw.setName("VW");
+        vw.setInfo("Golf GTI " + vw.getName());
+
+
+        ivan.setCar(bmw);
+        tom.setCar(mb);
+        volker.setCar(vw);
+
+        bmw.setOwner(ivan);
+        mb.setOwner(tom);
+        vw.setOwner(volker);
+
     }
 
 }
