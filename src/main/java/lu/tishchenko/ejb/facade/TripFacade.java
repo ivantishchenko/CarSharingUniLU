@@ -40,16 +40,6 @@ public class TripFacade extends AbstractDBObjectFacade {
             return null;
         }
     }
-
-    public List<Trip> getAll() {
-        try {
-            return em.createQuery("select t from Trip t where t.deleted is null "
-                    + "and t.freePlaces > 0").getResultList();
-        } catch (NoResultException nrEx) {
-            return null;
-        }
-    }
-
     public List<Trip> getAll(User loggedUser) {
         try {
             List<Trip> tracks = em.createQuery("select t from Trip t where t.deleted is null "
@@ -66,6 +56,15 @@ public class TripFacade extends AbstractDBObjectFacade {
             return null;
         }
     }
+/*
+    public List<Trip> getAll() {
+        try {
+            return em.createQuery("select t from Trip t where t.deleted is null "
+                    + "and t.freePlaces > 0").getResultList();
+        } catch (NoResultException nrEx) {
+            return null;
+        }
+    }*/
 
     public List<Trip> getTrackByDestination(String start, String stop){
         try {

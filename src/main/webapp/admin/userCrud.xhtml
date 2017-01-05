@@ -10,7 +10,7 @@
 <ui:composition template="../template.xhtml">
     <ui:define name="content">
         <h:form id="formTblUser">
-            <h:commandLink value="Make a login" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
+            <h:commandLink value="Please sign in" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
 
             <p:dataTable id="tblUser" widgetVar="tblUser" var="user" value="#{userFacade.all}" rendered="#{sessionData.loggedIn}">
                 <f:facet name="header">

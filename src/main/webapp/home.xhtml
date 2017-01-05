@@ -11,10 +11,15 @@
             <h:commandLink value="Please sign" action="/login.jsf?faces-redirect=true" rendered="#{not sessionData.loggedIn}"/>
 
             <h:panelGrid columns="1" rendered="#{sessionData.loggedIn}">
+                <p:panel id="user" header="Welcome" style="margin-bottom:20px">
                 <h:outputLabel value="Welcome, #{sessionData.loggedUser.name}, you are logged in :-)"/>
-                <p:commandButton icon="ui-icon-home" value="My trips" action="/user/myTripCrud.jsf?faces-redirect=true"/>
-                <p:commandButton icon="ui-icon-suitcase" value="All trips" action="/trip.jsf?faces-redirect=true"/>
+                </p:panel>
+
+
+                <p:commandButton icon="ui-icon-home" value="My trips" action="user/myTripCrud.jsf?faces-redirect=true"/>
+                <p:commandButton icon="ui-icon-suitcase" value="All trips" action="trip/trips.jsf?faces-redirect=true"/>
                 <p:commandButton icon="ui-icon-home" value="My vehicle" action="car/carCrud.jsf?faces-redirect=true"/>
+
             </h:panelGrid>
         </h:form>
         <ui:include src="car/carCrudPopup.xhtml"/>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<ui:composition template="../template.xhtml">
+    <ui:define name="content">
+        <h:form id="formTblTrip">
+            <p:dataTable id="tblTrip" widgetVar="tblTrip" var="trip"
+                         value="#{tripFacade.getAll(sessionData.loggedUser)}" rendered="#{sessionData.loggedIn}">
+                <f:facet name="header">
+                    Tracks
+                </f:facet>
+                <p:column style="width:44px;" exportable="false">
+                    <p:commandButton icon="ui-icon-plus" title="Book"
+                                     action="#{(tripAction.reserv(sessionData.loggedUser, trip))}"
+                                     rendered="#{not tripAction.isReserved(sessionData.loggedUser, trip) and
+                                     (not tripAction.isOwner(sessionData.loggedUser, trip))}"
+                                     update="@(form)"
+                    />
+                    <p:commandButton icon="ui-icon-trash" title="Unbook"
+                                     action="#{tripAction.unReserv(sessionData.loggedUser, trip)}"
+                                     rendered="#{tripAction.isReserved(sessionData.loggedUser, trip) and
+                                     (not tripAction.isOwner(sessionData.loggedUser, trip))}"
+                                     update="@(form)"
+                    />
+                </p:column>
+                <p:column headerText="Name" sortBy="#{trip.name}" filterBy="#{trip.name}">
+                    <h:outputText value="#{trip.name}"/>
+                </p:column>
+
+                <p:column headerText="Driver" sortBy="#{trip.owner.name}" filterBy="#{trip.owner.name}">
+                    <h:outputText value="#{trip.owner.name}"/>
+                </p:column>
+
+                <p:column headerText="Max seats" sortBy="#{trip.maxCompanions}" filterBy="#{trip.maxCompanions}">
+                    <h:outputText value="#{trip.maxCompanions}"/>
+                </p:column>
+
+                <p:column headerText="Free seats" sortBy="#{trip.freePlaces}" filterBy="#{trip.freePlaces}">
+                    <h:outputText value="#{trip.freePlaces}"/>
+                </p:column>
+
+                <p:column headerText="Source" sortBy="#{trip.startLocation}" filterBy="#{trip.startLocation}">
+                    <h:outputText value="#{trip.startLocation}"/>
+                </p:column>
+
+                <p:column headerText="Destination" sortBy="#{trip.stopLocation}" filterBy="#{trip.stopLocation}">
+                    <h:outputText value="#{trip.stopLocation}"/>
+                </p:column>
+
+                <f:facet name="footer">
+                    Total count: #{fn:length(tripFacade.getAll(sessionData.loggedUser))}
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
