@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--suppress XmlWrongRootElement -->
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="popupTrip" widgetVar="popupTrip" modal="true" resizable="false"
+              header="#{tripCrudBean.readOnly?'Delete...':empty tripCrudBean.entity.created?'Add...':'Edit..'}">
+        <p:ajax form="formPopupTrip" event="close"
+                listener="#{tripCrudBean.endConversation}" global="false"/>
+        <h:form id="formPopupTrip">
+            <p:outputPanel style="text-align:center;" rendered="#{sessionData.loggedIn}">
+                <p:panelGrid columns="3" rendered="#{not empty tripCrudBean.entity}">
+                    <p:outputLabel for="itTripname" value="Name:"/>
+                    <p:inputText id="itTripname" value="#{tripCrudBean.entity.name}" required="true"
+                                 disabled="#{tripCrudBean.readOnly}"/>
+                    <p:message for="itTripname"/>
+
+                    <p:outputLabel for="itStart" value="Source:"/>
+                    <p:inputText id="itStart" value="#{tripCrudBean.entity.startLocation}" required="true"
+                                 disabled="#{tripCrudBean.readOnly}"/>
+                    <p:message for="itStart"/>
+
+                    <p:outputLabel for="itStop" value="Destination:"/>
+                    <p:inputText id="itStop" value="#{tripCrudBean.entity.stopLocation}" required="true"
+                                 disabled="#{tripCrudBean.readOnly}"/>
+                    <p:message for="itStop"/>
+
+                    <p:outputLabel for="itMaxCompan" value="Max seats:"/>
+                    <p:inputText id="itMaxCompan" value="#{tripCrudBean.entity.maxCompanions}" required="true"
+                                 disabled="#{tripCrudBean.readOnly}"/>
+                    <p:message for="itMaxCompan"/>
+
+                    <p:commandButton value="Record" icon="ui-icon-disk"
+                                     rendered="#{not tripCrudBean.readOnly}"
+                                     action="#{tripCrudBean.doSaveEdit}"
+                                     update="@(form)"
+                                     oncomplete="if(!args.validationFailed) { PF('popupTrip').hide(); PF('tblTrip').filter(); } return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                    <p:commandButton
+                            value="Remove" icon="ui-icon-trash"
+                            rendered="#{tripCrudBean.readOnly}"
+                            action="#{tripCrudBean.doDelete}"
+                            update="@(form)"
+                            oncomplete="PF('popupTrip').hide(); PF('tblTrip').filter(); return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                    <p:commandButton value="Cancel" icon="ui-icon-cancel" immediate="true"
+                                     action="#{tripCrudBean.doCancel}"
+                                     update="@(form)"
+                                     oncomplete="PF('popupTrip').hide(); return false;">
+                        <!--suppress ELValidationInJSP -->
+                        <f:param name="cid" value="#{javax.enterprise.context.conversation.id}"/>
+                    </p:commandButton>
+                </p:panelGrid>
+                <p:messages/>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+</ui:composition>
